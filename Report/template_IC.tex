@@ -1,0 +1,116 @@
+\documentclass[12pt,a4paper]{article}
+
+% Pacotes para o português.
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{indentfirst}
+\usepackage{url}
+\usepackage{array}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{setspace}
+\usepackage{breakcites}
+\usepackage{float}
+\usepackage{times}
+\usepackage{lipsum}
+
+% Comando para marcar o texto para revisão.
+\newcommand{\rev}[1]{\textcolor{red}{#1}}
+
+% Permite escrever aspas normais "text" em vez de ``text''
+\usepackage[autostyle]{csquotes}
+\MakeOuterQuote{"}
+
+\begin{document}
+
+\doublespacing
+
+\begin{titlepage}
+    \begin{center}
+        {\large \sc UNIVERSIDADE DE SÃO PAULO} \\
+        {\large \sc INSTITUTO DE CIÊNCIAS MATEMÁTICAS E DE COMPUTAÇÃO}\\[0.7cm]
+        {\small \sc DEPARTAMENTO DE .... }\\[2.8cm]
+
+        % Título.
+        {\large \sc Projeto de Pesquisa de Iniciação Científica - Sem Bolsa}\\
+        \rule{0.9\linewidth}{0.5mm} \\[0.4cm]
+        {\large \bfseries Título}\\
+        \rule{0.9\linewidth}{0.5mm} \\[0.4cm]
+    \end{center}
+    
+    % Assinaturas
+    \begin{minipage}{0.45\textwidth}
+        \emph{Candidato:}\\[2.08cm]
+        \begin{picture}(5,20)(0,-22.5) 
+            % \put(0,1){\includegraphics[scale=0.13]{figs/assinatura-aluno.jpg}}
+            \put(0,0){\rule{0.9\linewidth}{0.5mm}}
+            \put(0,-22.5){}
+        \end{picture}
+    \end{minipage}
+    \hspace{1cm}
+    \begin{minipage}{0.45\textwidth}
+        \emph{Orientador:}\\[2.08cm]
+        \begin{picture}(130,20)(0,-22.5)
+            % \put(18,1){\includegraphics[scale=0.48]{figs/assinatura-orientador.png}}
+            \put(0,0){\rule{0.9\linewidth}{0.5mm}}
+            \put(0,-22.5){}
+        \end{picture}
+    \end{minipage}
+
+    \vfill
+
+    % Data
+    \begin{center}
+        \makeatletter
+        \@date
+        \makeatother
+    \end{center}
+\end{titlepage}
+
+\pagestyle{empty}
+\begin{center}
+    {\bf \Large Resumo}
+\end{center}
+%
+
+\noindent{}
+\newpage
+\pagestyle{empty}
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\pagestyle{plain}
+
+\section{Introdução}
+\label{section:introducao}
+
+\section{Trabalhos Relacionados}
+\label{section:trabrelacionados}
+
+\section{Objetivos}
+\label{section:objetivos}
+\subsection{Objetivos gerais}
+
+\subsection{Objetivos específicos}
+
+\section{Plano de Trabalho e Cronograma} 
+
+\section{Materiais e Métodos}
+\label{section:materiais}
+Não existe uma "receita pronta" para escrever a seção Materiais e Métodos que funcione para todos os trabalhos. Logicamente, quanto mais voltado às aplicações for seu projeto, mais relevante será a explicação e o nível de detalhe desta seção. Ela deveria possuir um nível de detalhamento tal que, se o projeto for entregue a outra pessoa, ela consiga executar a pesquisa exatamente da mesma forma que você executaria (Vianna, 2001). Na parte de métodos podem entrar outros itens, tais como a apresentação de seminários para o orientador, a resolução de problemas, etc. 
+
+\newpage
+
+\begin{thebibliography}{99}
+\bibitem{artigo} T. Izio and C. Aio, Novos e Importantes Resultados, \emph{Int. Journal of Mickey Mouse} {\bf 60}  (1988), 185-195.
+\bibitem{livro} A.~Utor,  \emph{Assuntos metarelevantes}, Springer-Verlag, Berlin and Heidelberg, 1993. vii+260 pp.
+\end{thebibliography}
+
+\end{document}
