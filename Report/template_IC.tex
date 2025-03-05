@@ -1,116 +1,156 @@
-\documentclass[12pt,a4paper]{article}
-
-% Pacotes para o português.
-\usepackage[brazilian]{babel}
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-
+\usepackage[brazilian]{babel}
 \usepackage{graphicx}
-\usepackage{xcolor}
-\usepackage{indentfirst}
-\usepackage{url}
-\usepackage{array}
-\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
-\usepackage{multirow}
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{caption}
+\usepackage{geometry}
 \usepackage{setspace}
-\usepackage{breakcites}
-\usepackage{float}
-\usepackage{times}
-\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta}
 
-% Comando para marcar o texto para revisão.
-\newcommand{\rev}[1]{\textcolor{red}{#1}}
-
-% Permite escrever aspas normais "text" em vez de ``text''
-\usepackage[autostyle]{csquotes}
-\MakeOuterQuote{"}
+\geometry{a4paper, margin=2.5cm}
+\onehalfspacing
 
 \begin{document}
 
-\doublespacing
-
 \begin{titlepage}
-    \begin{center}
-        {\large \sc UNIVERSIDADE DE SÃO PAULO} \\
-        {\large \sc INSTITUTO DE CIÊNCIAS MATEMÁTICAS E DE COMPUTAÇÃO}\\[0.7cm]
-        {\small \sc DEPARTAMENTO DE .... }\\[2.8cm]
+\begin{center}
+\vspace*{1cm}
+{\Large \textbf{UNIVERSIDADE DE SÃO PAULO}}\\[0.5cm]
+{\Large \textbf{INSTITUTO DE CIÊNCIAS MATEMÁTICAS E DE COMPUTAÇÃO}}\\[0.5cm]
+{\large DEPARTAMENTO DE CIÊNCIAS DE COMPUTAÇÃO}\\[4cm]
 
-        % Título.
-        {\large \sc Projeto de Pesquisa de Iniciação Científica - Sem Bolsa}\\
-        \rule{0.9\linewidth}{0.5mm} \\[0.4cm]
-        {\large \bfseries Título}\\
-        \rule{0.9\linewidth}{0.5mm} \\[0.4cm]
-    \end{center}
-    
-    % Assinaturas
-    \begin{minipage}{0.45\textwidth}
-        \emph{Candidato:}\\[2.08cm]
-        \begin{picture}(5,20)(0,-22.5) 
-            % \put(0,1){\includegraphics[scale=0.13]{figs/assinatura-aluno.jpg}}
-            \put(0,0){\rule{0.9\linewidth}{0.5mm}}
-            \put(0,-22.5){}
-        \end{picture}
-    \end{minipage}
-    \hspace{1cm}
-    \begin{minipage}{0.45\textwidth}
-        \emph{Orientador:}\\[2.08cm]
-        \begin{picture}(130,20)(0,-22.5)
-            % \put(18,1){\includegraphics[scale=0.48]{figs/assinatura-orientador.png}}
-            \put(0,0){\rule{0.9\linewidth}{0.5mm}}
-            \put(0,-22.5){}
-        \end{picture}
-    \end{minipage}
+{\Large \textbf{Projeto de Pesquisa de Iniciação Científica - Sem Bolsa}}\\[0.5cm]
+\rule{\linewidth}{0.5pt}\\[0.5cm]
+{\LARGE \textbf{GCN Web Tool}}\\[0.5cm]
+\rule{\linewidth}{0.5pt}\\[1.5cm]
 
-    \vfill
-
-    % Data
-    \begin{center}
-        \makeatletter
-        \@date
-        \makeatother
-    \end{center}
+\begin{tabular}{ll}
+\textit{Candidato:} & \textit{Orientador:} \\[1cm]
+\rule{6cm}{0.5pt} & \rule{6cm}{0.5pt} \\
+Ian Bezerra & Lucas Pascotti Valem \\
+\end{tabular}
+\end{center}
 \end{titlepage}
 
-\pagestyle{empty}
-\begin{center}
-    {\bf \Large Resumo}
-\end{center}
-%
+\section*{Resumo}
 
-\noindent{}
-\newpage
-\pagestyle{empty}
+O estudo de 
+
+
+
+% Sumário (Table of Contents)
 \tableofcontents
 \newpage
-\setcounter{page}{1}
-\pagestyle{plain}
 
+% Add your report content here
 \section{Introdução}
-\label{section:introducao}
+Este relatório apresenta o desenvolvimento da ferramenta web GCN (Graph Convolutional Network).
 
 \section{Trabalhos Relacionados}
-\label{section:trabrelacionados}
+% Add your methodology section
 
 \section{Objetivos}
-\label{section:objetivos}
-\subsection{Objetivos gerais}
+\subsection{Objetivo Geral}
 
-\subsection{Objetivos específicos}
+\subsection{Objetivos Específicos}
 
-\section{Plano de Trabalho e Cronograma} 
+\section{Plano de Trabalho e cronograma}
+\subsection{Pipeline do Projeto}
 
-\section{Materiais e Métodos}
-\label{section:materiais}
-Não existe uma "receita pronta" para escrever a seção Materiais e Métodos que funcione para todos os trabalhos. Logicamente, quanto mais voltado às aplicações for seu projeto, mais relevante será a explicação e o nível de detalhe desta seção. Ela deveria possuir um nível de detalhamento tal que, se o projeto for entregue a outra pessoa, ela consiga executar a pesquisa exatamente da mesma forma que você executaria (Vianna, 2001). Na parte de métodos podem entrar outros itens, tais como a apresentação de seminários para o orientador, a resolução de problemas, etc. 
+A Figura \ref{fig:pipeline} ilustra o pipeline completo do projeto, que consiste nas seguintes etapas:
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[node distance=2cm, auto, thick]
+        % Nodes
+        \node[draw, rectangle, minimum width=3cm, minimum height=1cm] (alexnet) {CNN};
+        \node[draw, rectangle, minimum width=3cm, minimum height=2.5cm, right=of alexnet] (embeddings) {};
+        \node[draw, rectangle, minimum width=4cm, minimum height=2.5cm, right=of embeddings] (distance) {};
+        
+        \node[draw, rectangle, minimum width=3cm, minimum height=2cm, below=of embeddings] (rankings) {\includegraphics[width=2.8cm]{rankings.png}};
+        \node[draw, rectangle, minimum width=3cm, minimum height=1cm, right=of rankings] (graph) {Grafo};
+        
+        % Arrows
+        \draw[->] (alexnet) -- (embeddings);
+        \draw[->] (embeddings) -- (distance);
+        \draw[->] (distance) -- (rankings);
+        \draw[->] (rankings) -- (graph);
+        
+        % Embeddings visualization with vectors in the top part of the embeddings box
+        \begin{scope}[shift={(embeddings.north)}, yshift=-1.2cm, scale=0.4]
+            % Coordinate system
+            \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+            \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+            
+            % Vectors
+            \draw[->, thick, blue] (0,0) -- (0.8,1.2) node[right] {$v_1$};
+            \draw[->, thick, red] (0,0) -- (-0.7,0.9) node[left] {$v_2$};
+            \draw[->, thick, green] (0,0) -- (1.1,0.3) node[right] {$v_3$};
+            \draw[->, thick, orange] (0,0) -- (-0.5,-0.8) node[left] {$v_4$};
+        \end{scope}
+        
+        % Distance matrix visualization
+        \begin{scope}[shift={(distance.north)},xshift=-0.5cm, yshift=-1.9cm, scale=0.35]
+            % Matrix
+            \draw (0,0) grid (4,4);
+            
+            % Values in the matrix (darker colors for smaller distances)
+            \fill[fill=white!80!black] (0,0) rectangle (1,1);
+            \fill[fill=white!30!black] (0,1) rectangle (1,2);
+            \fill[fill=white!10!black] (0,2) rectangle (1,3);
+            \fill[fill=white!100!black] (0,3) rectangle (1,4);
+            
+            \fill[fill=white!20!black] (1,0) rectangle (2,1);
+            \fill[fill=white!80!black] (1,1) rectangle (2,2);
+            \fill[fill=white!100!black] (1,2) rectangle (2,3);
+            \fill[fill=white!40!black] (1,3) rectangle (2,4);
+            
+            \fill[fill=white!5!black] (2,0) rectangle (3,1);
+            \fill[fill=white!100!black] (2,1) rectangle (3,2);
+            \fill[fill=white!80!black] (2,2) rectangle (3,3);
+            \fill[fill=white!15!black] (2,3) rectangle (3,4);
+            
+            \fill[fill=white!100!black] (3,0) rectangle (4,1);
+            \fill[fill=white!25!black] (3,1) rectangle (4,2);
+            \fill[fill=white!35!black] (3,2) rectangle (4,3);
+            \fill[fill=white!80!black] (3,3) rectangle (4,4);
+            % Draw grid lines again to make them visible
+            \draw (0,0) grid (4,4);
+            
+            % Labels
+            \node at (-0.5, 0.5) {$v_4$};
+            \node at (-0.5, 1.5) {$v_3$};
+            \node at (-0.5, 2.5) {$v_2$};
+            \node at (-0.5, 3.5) {$v_1$};
+            
+            \node at (0.5, 4.5) {$v_1$};
+            \node at (1.5, 4.5) {$v_2$};
+            \node at (2.5, 4.5) {$v_3$};
+            \node at (3.5, 4.5) {$v_4$};
+        \end{scope}
+        
+        % Text at the bottom of the embeddings box
+        \node at (embeddings.south) [yshift=0.4cm] {Embeddings};
+        
+        % Text at the bottom of the distance matrix box
+        \node at (distance.south) [yshift=0.4cm] {Matriz de Distância};
+        
+        % Text at the bottom of the rankings box
+        \node at (rankings.south) [yshift=0.4cm] {Rankings};
+    \end{tikzpicture}
+    \caption{Pipeline do projeto: da extração de características com CNN até construção do grafo}
+    \label{fig:pipeline}
+\end{figure}
 
-\newpage
+O pipeline começa com a extração de características das imagens utilizando a rede neural convolucional AlexNet, gerando embeddings (representações vetoriais) para cada imagem. Em seguida, calculamos a matriz de distância entre esses embeddings, que é usada para gerar rankings de similaridade. Por fim, esses rankings são utilizados para construir o grafo que representa as relações entre as imagens.
 
-\begin{thebibliography}{99}
-\bibitem{artigo} T. Izio and C. Aio, Novos e Importantes Resultados, \emph{Int. Journal of Mickey Mouse} {\bf 60}  (1988), 185-195.
-\bibitem{livro} A.~Utor,  \emph{Assuntos metarelevantes}, Springer-Verlag, Berlin and Heidelberg, 1993. vii+260 pp.
-\end{thebibliography}
+
+% Add your methodology section
+
+\section{Materiais e métodos}
+% Add your results section
+
+\section{Referências}
+% Add your conclusion
 
 \end{document}

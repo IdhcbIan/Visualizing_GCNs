@@ -1,0 +1,11 @@
+
+# Pip
+
+tarfile
+requests
+pretrainedmodels
+numpy
+natsort
+torch
+sklearn
+torchvision
