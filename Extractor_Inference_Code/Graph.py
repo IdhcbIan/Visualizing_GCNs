@@ -90,58 +90,65 @@ def visualize_knn_graph(rankings, k=16, figsize=(15, 10), title=None,
 
 def export_graph_positions(G, pos,model_name, k):
     """
-    Export the graph node positions to a JSON file.
+    Export the graph node positions AND edges to a JSON file.
     
     Parameters:
     -----------
     G : networkx.Graph
-        The graph whose positions will be exported
+        The graph with nodes and edges
     pos : dict
         Dictionary of node positions {node_id: (x, y)}
-    output_path : str
-        Path where the JSON file will be saved
+    model_name : str
+        Name of the model for file naming
+    k : int
+        Number of neighbors used
     
     Returns:
     --------
     str
         Path to the saved JSON file
     """
-    # Create a serializable dictionary of positions
-    # Convert numpy arrays to lists for JSON serialization
+    # Create export data structure
     export_data = {
         "nodes": {},
+        "edges": {},  
         "graph_info": {
             "num_nodes": len(G.nodes),
-            "num_edges": len(G.edges)
+            "num_edges": len(G.edges),
+            "k": k
         }
     }
     
-    # Add node positions and any attributes
+    # Add node positions
     for node_id in G.nodes():
         node_pos = pos[node_id]
-        # Convert numpy arrays or tuples to lists for JSON serialization
         position = [float(node_pos[0]), float(node_pos[1])]
         
-        # Include node attributes if available
         node_attrs = dict(G.nodes[node_id])
         export_data["nodes"][str(node_id)] = {
             "position": position,
             "attributes": node_attrs
         }
     
-   
+    for node_id in G.nodes():
+        # Get all neighbors (outgoing edges for directed graph)
+        neighbors = list(G.neighbors(node_id))
+        # Store as list of neighbor IDs
+        export_data["edges"][str(node_id)] = [int(n) for n in neighbors]
+    
     path = model_name + "_output_"+ str(k) + ".json"
-    print("Path: ")
-    print(path)
+    print(f"Path: {path}")
+    
     # Save to JSON file
     with open(path, 'w') as f:
         json.dump(export_data, f, indent=2)
 
-    print(f"Graph positions exported to {path} with k: {k}")
+    total_edges = sum(len(e) for e in export_data["edges"].values())
+    print(f"Graph exported: {len(export_data['nodes'])} nodes, {total_edges} edges")
+    print(f"Saved to: {path}")
     return path
 
 
 # Export the positions
 #output_path = "Runs/graph_positions.json"
 #export_graph_positions(G, pos, output_path)
-# 
