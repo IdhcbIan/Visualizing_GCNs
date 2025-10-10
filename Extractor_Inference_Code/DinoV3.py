@@ -1,26 +1,12 @@
+import os
 import torch
 import numpy as np
 from PIL import Image
 from torchvision import transforms
 
-import os
-import time
-import random
-import numpy as np
-
-import timm
-import torch
-import torch.nn as nn
-from tqdm import trange, tqdm
-import torch.nn.functional as F
-from torchvision import transforms
-
-from datetime import datetime
-import torch.distributed as dist
 
 # DinoV3 imports
-from transformers import AutoImageProcessor, AutoModel
-from transformers.image_utils import load_image
+from transformers import AutoModel
 from huggingface_hub import login
 
 
@@ -42,7 +28,7 @@ from huggingface_hub import login
 from dotenv import load_dotenv
 
 load_dotenv()
-hf_token = os.getenv('HUGGING_FACE_TOKEN')
+hf_token = os.getenv('HUGGING_FACE_TOKEN') # O Modelo DinoV3 Prescisa de autenticacao no HuggingFace
 
 
 if hf_token:
