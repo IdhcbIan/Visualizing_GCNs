@@ -66,7 +66,10 @@ model_options = {
     47: "vgg19_bn",
     48: "ConvNext-large-224-22k-1k",
     49: "ConvNext-tiny-224",
-    50: "swint"
+    50: "swint",
+    51: "dinov3-vits16-pretrain-lvd1689m",
+    52: "dinov3-vitb16-pretrain-lvd1689m",
+    53: "dinov3-vitl16-pretrain-lvd1689m"
 }
 print("Select an option:")
 
@@ -104,7 +107,7 @@ from SwinT import swint_inference
 
 
 # Caso seja DinoV2 usar outra funcao
-different_models = ["dinov2_vits14", "dinov2_vitb14", "dinov2_vitl14", "dinov2_vitg14", "vit", "swint", "ConvNext-large-224-22k-1k", "ConvNext-tiny-224"]
+different_models = ["dinov2_vits14", "dinov2_vitb14", "dinov2_vitl14", "dinov2_vitg14", "vit", "swint", "ConvNext-large-224-22k-1k", "ConvNext-tiny-224", "dinov3-vits16-pretrain-lvd1689m", "dinov3-vitb16-pretrain-lvd1689m", "dinov3-vitl16-pretrain-lvd1689m"]
 
 if model_name not in different_models:
     # Configuração do modelo pré-treinado
@@ -239,9 +242,12 @@ ini = time.time()
 print(f"Total images to process: {len(image_paths)}")
 
 from DinoV2 import dinov2_inference
+from DinoV3 import dinov3_inference
 
 if model_name == "dinov2" or model_name == "dinov2_vits14" or model_name == "dinov2_vitb14" or model_name == "dinov2_vitl14" or model_name == "dinov2_vitg14":
     features = dinov2_inference(model_name, image_paths)    #Uma unica call para o funcao e com uma call para o modelo!!
+elif model_name == "dinov3-vits16-pretrain-lvd1689m" or model_name == "dinov3-vitb16-pretrain-lvd1689m" or model_name == "dinov3-vitl16-pretrain-lvd1689m":
+    features = dinov3_inference(model_name, image_paths)    #Uma unica call para o funcao e com uma call para o modelo!!
 elif model_name == "vit":
     features = vit_inference(image_paths)
 elif model_name == "ConvNext-large-224-22k-1k":
